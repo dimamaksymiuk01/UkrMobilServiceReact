@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UkrMobilServiceNotes.Models;
+using UkrMobilServiceNotes2.Models;
 
-namespace UkrMobilServiceNotes.Data
+namespace UkrMobilServiceNotes2.Data
 {
     public interface INotesRepository
     {
