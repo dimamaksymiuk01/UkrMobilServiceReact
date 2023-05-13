@@ -446,18 +446,22 @@ html {
 
 
 // 
-select {
-    width: 100%;
-    font-size: 1rem;
-    height: 53.4px;
-    border: none;
-    color: #333;
-    border-radius: 0.2rem;
-    background-color: rgb(217, 224, 227);
-    border: none;
-    // padding: 0.8rem 1.3rem;
-}
+// select {
+//     width: 100%;
+//     font-size: 1rem;
+//     // height: 53.4px;
+//     border: none;
+//     color: #333;
+//     border-radius: 0.2rem;
+//     background-color: rgb(217, 224, 227);
+//     border: none;
+//     // padding: 0.8rem 1.3rem;
+// }
 .waitDate {
     width: 170px;
     height: 53.4px;
+}
+.MuiFormControl-root {
+    // background-color: red;
+    display: flex;
 }
