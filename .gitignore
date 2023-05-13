@@ -56,3 +56,6 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+backend/UkrMobilNotes.db
+backend/UkrMobilNotes.db-shm
+backend/UkrMobilNotes.db-wal
