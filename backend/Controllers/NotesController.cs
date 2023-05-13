@@ -14,12 +14,10 @@ namespace UkrMobilServiceNotes2.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INotesRepository repository;
-        private readonly IMapper mapper;
 
-        public NotesController(INotesRepository repository, IMapper mapper)
+        public NotesController(INotesRepository repository)
         {
             this.repository = repository;
-            this.mapper = mapper;
         }
 
         [HttpGet("")]
@@ -27,7 +25,7 @@ namespace UkrMobilServiceNotes2.Controllers
         public async Task<IActionResult> GetAllNotes()
         {
             var notes = await repository.GetAllNotes();
-            return Ok(mapper.Map<IEnumerable<Note>>(notes));
+            return Ok(notes);
         }
 
         [HttpDelete("{id}")]
