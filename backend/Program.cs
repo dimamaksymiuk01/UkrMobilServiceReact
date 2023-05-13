@@ -32,6 +32,7 @@ app.MapControllers();
 
 app.UseCors("AllowAll");
 
+<<<<<<< HEAD
 app.UseCors(builder =>
             builder
             .WithOrigins("https://localhost:5000", "http://localhost:3000", "http://localhost:3004", "http://localhost:3005")
@@ -39,5 +40,12 @@ app.UseCors(builder =>
             .AllowAnyMethod()
             .AllowCredentials()
 );
+=======
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true) // allow any origin 
+    .AllowCredentials());
+>>>>>>> a10bca3cd49cd833f23a89f77b86733ba70d144d
 
 app.Run();
