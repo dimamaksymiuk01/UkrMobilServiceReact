@@ -1,5 +1,4 @@
 import './inputs.css'
-import { useState } from 'react';
 
 import { useForm } from "react-hook-form";
 
@@ -9,7 +8,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 function Inputs() {
@@ -37,13 +37,18 @@ function Inputs() {
         setAge(event.target.value);
       };
 
+      const [array, setArray] = useState([]);
+useEffect(() => {
+        console.log("sas");
+        axios.get("http://localhost:5192/api/Notes").then(res => {
+            setArray(res.data);
+            console.log(res.data);
+        });
+    }, []);
+
 
     return (
             <>
-
-
-
-
 
             <h1>UKRmobil service notes</h1>
         
