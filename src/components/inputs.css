@@ -201,42 +201,49 @@ h1 {
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
-.userInfo {
-  margin-top: 50px;
-}
-.userInfo thead tr {
+thead tr {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 30px;
+  text-align: center;
   background-color: rgb(217, 224, 227);
+  border-radius: 10px;
 }
-.userInfo thead tr th {
+thead tr th {
   width: 160px;
   height: 50px;
 }
-.userInfo thead tr th:nth-child(7) {
+thead tr th:nth-child(7) {
   width: 100px;
 }
-.userInfo tbody tr {
+
+tbody tr {
   display: flex;
   justify-content: center;
   gap: 30px;
 }
-.userInfo tbody tr td {
+tbody tr td {
   min-height: 50px;
   width: 160px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.userInfo tbody tr td:nth-child(7) {
+tbody tr td:nth-child(7) {
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+tbody tr:hover {
+  background-color: rgba(217, 224, 227, 0.502);
+  border-radius: 10px;
 }
 
 .toggleButton {
   cursor: pointer;
-  display: block;
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   transition: transform 0.14s ease;
@@ -398,4 +405,11 @@ html {
 
 .lbSelect {
   margin-top: 20px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }/*# sourceMappingURL=inputs.css.map */

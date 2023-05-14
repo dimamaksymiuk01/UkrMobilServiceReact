@@ -13,6 +13,8 @@ import Select from '@mui/material/Select';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 
+
+
 function Inputs() {
     const {
         register,
@@ -27,23 +29,25 @@ function Inputs() {
       });
     
       const onSubmit = (data) => {
+        handleSASbmit(data); // Додайте цей рядок для додавання даних форми до масиву data
         console.log(data);
         reset();
-      }
-
-
+      };
+    
       const [age, setAge] = React.useState('');
-
+    
       const handleChange = (event) => {
         setAge(event.target.value);
       };
-
+    
+      const [data, setData] = useState([]);
+    
+      const handleSASbmit = (formData) => {
+        setData((prevData) => [...prevData, formData]); // Додавання нового об'єкта до масиву даних при відправці форми
+      };
 
     return (
             <>
-
-
-
 
 
             <h1>UKRmobil service notes</h1>
@@ -53,7 +57,7 @@ function Inputs() {
               <div className='allInput'>
 
               <div className='form__group'>
-      <FormControl  sx={{ m: 1, minWidth: 170, minHeight: 50}} size="">
+      <FormControl  sx={{ m: 1, minWidth: 190, minHeight: 50}} size="">
       <InputLabel className='lbSelect'  id="demo-select-small-label">Buy</InputLabel>
       <Select className='lbSelect' {...register('market', {
         required: 'Please select a store',
@@ -79,18 +83,6 @@ function Inputs() {
     </FormControl>
     </div>
         
-            {/* <div className='form__group'>
-            <label className='form__label' htmlFor="name">Market
-            <select className='sender' {...register('market')}>
-                  <option id="sender">Techno+</option>
-                  <option id="sender">UkrMobil</option>
-                  <option id="sender">Prom</option>
-                  <option id="sender">OLX</option>
-                  <option id="sender">VsePlus</option>
-                  <option id="sender">Other</option>
-                </select>
-              </label>
-              </div> */}
         
               <div className='form__group'>
               <label className='form__label' htmlFor="name">Enter name
@@ -111,7 +103,7 @@ function Inputs() {
         
               <div className='form__group'>
               <label className='form__label'>Phone number
-              <input className='form__input' placeholder="Client name" required=""
+              <input className='form__input' placeholder="Number" required=""
               {...register('phone', {
                 required: 'Enter the phone number',
                 minLength: {
@@ -175,7 +167,48 @@ function Inputs() {
         
         
             </form>
-        
+
+
+
+
+
+                  {/* Таблиця */}
+
+                  <div className='box'>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Device</th>
+            <th>Product</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, index) => (
+            <tr key={index}>
+              <td>{row.client}</td>
+              <td>{row.phone}</td>
+              <td>{row.device}</td>
+              <td>{row.product}</td>
+              <td>{row.date}</td>
+              <td>
+          <label className="toggleButton">
+          <input type="checkbox" />
+            <div>
+              <svg viewBox="0 0 44 44">
+                <path d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758" transform="translate(-2.000000, -2.000000)"></path>
+              </svg>
+            </div>
+          </label>
+        </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div>
         </>
     )
   }
