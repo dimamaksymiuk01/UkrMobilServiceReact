@@ -16,6 +16,9 @@ import Stack from '@mui/material/Stack';
 
 
 function Inputs() {
+
+    const today = new Date().toISOString().split('T')[0]; 
+
     const {
         register,
         formState: {
@@ -29,7 +32,7 @@ function Inputs() {
       });
     
       const onSubmit = (data) => {
-        handleSASbmit(data); // Додайте цей рядок для додавання даних форми до масиву data
+        handleSASbmit(data);
         console.log(data);
         reset();
       };
@@ -43,8 +46,12 @@ function Inputs() {
       const [data, setData] = useState([]);
     
       const handleSASbmit = (formData) => {
-        setData((prevData) => [...prevData, formData]); // Додавання нового об'єкта до масиву даних при відправці форми
+        const newData = [...data, formData];
+        newData.sort((a, b) => new Date(a.date) - new Date(b.date)); 
+        setData(newData);
       };
+
+
 
     return (
             <>
@@ -149,17 +156,24 @@ function Inputs() {
               </label>
               </div>
         
-              <div className='date'>
-              <label>Date of arrival:</label>
-              <input type='date' className='waitDate' 
-              {...register('date', {
-                required: 'Enter the date',
-              })}
-              />
-            <div className='alertError'> {errors?.date && <Alert className='alertError' severity="error">{errors?.date?.message || "Error!"}</Alert>} </div>
-
-    
-              </div>
+      <div className='date'>
+        <label>Date of arrival:</label>
+        <input
+          type='date'
+          className='waitDate'
+          {...register('date', {
+            required: 'Enter the date',
+          })}
+          min={today} 
+        />
+        <div className='alertError'>
+          {errors?.date && (
+            <Alert className='alertError' severity='error'>
+              {errors?.date?.message || 'Error!'}
+            </Alert>
+          )}
+        </div>
+      </div>
         
               </div>
               <input className="bubbly-button" type="submit" disabled={!isValid }></input>

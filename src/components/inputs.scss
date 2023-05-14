@@ -274,6 +274,7 @@ $baby-blue: #f8faff;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 30px;
             text-align: center;
             background-color: rgb(217, 224, 227);
@@ -281,6 +282,11 @@ $baby-blue: #f8faff;
             th {
                 width: 160px;
                 height: 50px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
             }
             th:nth-child(7) {
                 width: 100px;
@@ -291,6 +297,7 @@ $baby-blue: #f8faff;
         tr {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 30px;
             td {
                 min-height: 50px;
@@ -299,6 +306,7 @@ $baby-blue: #f8faff;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-wrap: wrap;
             }
             td:nth-child(7) {
                 width: 100px;
@@ -525,6 +533,7 @@ html {
 }
 
 .box {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
