@@ -1,4 +1,5 @@
 import './inputs.css'
+import { useState } from 'react';
 
 import { useForm } from "react-hook-form";
 
@@ -8,9 +9,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 function Inputs() {
     const {
@@ -37,18 +38,13 @@ function Inputs() {
         setAge(event.target.value);
       };
 
-      const [array, setArray] = useState([]);
-useEffect(() => {
-        console.log("sas");
-        axios.get("http://localhost:5192/api/Notes").then(res => {
-            setArray(res.data);
-            console.log(res.data);
-        });
-    }, []);
-
 
     return (
             <>
+
+
+
+
 
             <h1>UKRmobil service notes</h1>
         
@@ -57,9 +53,11 @@ useEffect(() => {
               <div className='allInput'>
 
               <div className='form__group'>
-      <FormControl sx={{ m: 1, minWidth: 180, minHeight: 70}}>
-      <InputLabel id="demo-select-small-label">Market</InputLabel>
-      <Select {...register('market')}
+      <FormControl  sx={{ m: 1, minWidth: 170, minHeight: 50}} size="">
+      <InputLabel className='lbSelect'  id="demo-select-small-label">Buy</InputLabel>
+      <Select className='lbSelect' {...register('market', {
+        required: 'Please select a store',
+      } )}
         labelId="demo-select-small-label"
         id="demo-select-small"
         value={age}
@@ -72,10 +70,12 @@ useEffect(() => {
         <MenuItem value={"Techno+"}>Techno+</MenuItem>
         <MenuItem value={"UkrMobil"}>UkrMobil</MenuItem>
         <MenuItem value={"Prom"}>Prom</MenuItem>
-        <MenuItem value={"OLX+"}>OLX+</MenuItem>
+        <MenuItem value={"OLX"}>OLX</MenuItem>
         <MenuItem value={"VsePlus"}>VsePlus</MenuItem>
         <MenuItem value={"Other"}>Other</MenuItem>
       </Select>
+      <div> {errors?.client && <Alert className='alertError' severity="error">{errors?.client?.message || "Error!"}</Alert>} </div>
+
     </FormControl>
     </div>
         
@@ -96,10 +96,16 @@ useEffect(() => {
               <label className='form__label' htmlFor="name">Enter name
               <input className='form__input' placeholder="Client name" required=""
               {...register('client', {
-                required: 'Enter a name',
+                required: 'Enter the name of the customer',
               })}
               />
-            <div> {errors?.client && <span>{errors?.client?.message || "Error!"}</span>} </div>
+            <div> {errors?.client && <Alert className='alertError' severity="error">{errors?.client?.message || "Error!"}</Alert>} </div>
+
+
+            <Stack sx={{ width: '100%' }} spacing={2}>
+    </Stack>
+
+
               </label>
               </div>
         
@@ -107,41 +113,47 @@ useEffect(() => {
               <label className='form__label'>Phone number
               <input className='form__input' placeholder="Client name" required=""
               {...register('phone', {
-                required: 'поле обов*язкове',
+                required: 'Enter the phone number',
                 minLength: {
                   value: 5,
                   message: 'мінімум 5 символів'
                 }
               })}
               />
+            <div> {errors?.phone && <Alert className='alertError' severity="error">{errors?.phone?.message || "Error!"}</Alert>} </div>
+
               </label>
               </div>
         
               <div className='form__group'>
               <label className='form__label' htmlFor="name">Device model
-              <input className='form__input' placeholder="Client name" required=""
+              <input className='form__input' placeholder="Model" required=""
               {...register('device', {
-                required: 'поле обов*язкове',
+                required: 'What kind of device is this?',
                 minLength: {
                   value: 5,
                   message: 'мінімум 5 символів'
                 }
               })}
               />
+            <div> {errors?.device && <Alert className='alertError' severity="error">{errors?.device?.message || "Error!"}</Alert>} </div>
+
               </label>
               </div>
         
               <div className='form__group'>
               <label className='form__label' htmlFor="name">Expecter product
-              <input className='form__input' placeholder="Client name" required=""
+              <input className='form__input' placeholder="Product" required=""
               {...register('product', {
-                required: 'поле обов*язкове',
+                required: 'What product are you ordering?',
                 minLength: {
                   value: 5,
                   message: 'мінімум 5 символів'
                 }
               })}
               />
+            <div> {errors?.product && <Alert className='alertError' severity="error">{errors?.product?.message || "Error!"}</Alert>} </div>
+
               </label>
               </div>
         
@@ -149,9 +161,12 @@ useEffect(() => {
               <label>Date of arrival:</label>
               <input type='date' className='waitDate' 
               {...register('date', {
-                required: 'поле обов*язкове',
+                required: 'Enter the date',
               })}
               />
+            <div className='alertError'> {errors?.date && <Alert className='alertError' severity="error">{errors?.date?.message || "Error!"}</Alert>} </div>
+
+    
               </div>
         
               </div>

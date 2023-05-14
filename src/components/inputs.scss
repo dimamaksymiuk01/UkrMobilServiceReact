@@ -21,8 +21,43 @@ h1 {
     .date {
         display: flex;
         flex-direction: column;
-        // width: 300px;
+        width: 200px;
+        position: relative;
+        .alertError {
+            position: absolute;
+            width: 170px;
+            top: 43px;
+        }
+        *,
+*:before,
+*:after{
+    box-sizing: border-box;
+}
+input[type="date"]{
+    background-color: rgb(217, 224, 227);
+    padding: 15px;
+    // transform: translate(-50%,-50%);
+    font-family: "Roboto Mono",monospace;
+    color: #333;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator{
+    background-color: rgb(217, 224, 227);
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
     }
+
+.MuiInputBase-root {
+    text-align: left;
+}
+
+
+
     .allInput {
         width: 100%;
         display: flex;
@@ -81,7 +116,12 @@ h1 {
 .form__group {
     font-family: 'Space Mono', monospace;
     width: 200px;
+    position: relative;
     // height: 50px;
+    .alertError {
+        position: absolute;
+        top: 85px;
+    }
 }
 
 
@@ -93,7 +133,7 @@ $button-text-color: #fff;
 $baby-blue: #f8faff;
 
 .bubbly-button{
-  margin-top: 30px;
+  margin-top: 55px;
   font-family: 'Helvetica', 'Arial', sans-serif;
   display: inline-block;
   font-size: 1em;
@@ -464,4 +504,16 @@ html {
 .MuiFormControl-root {
     // background-color: red;
     display: flex;
+    justify-content: end;
+    text-align: end;
+}
+.MuiOutlinedInput-notchedOutline {
+    // background-color: red;
+    display: flex;
+    justify-content: end;
+    text-align: end;
+    padding-top: 20px;
+}
+.lbSelect {
+    margin-top: 20px;
 }
