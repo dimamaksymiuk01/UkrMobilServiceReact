@@ -47,6 +47,7 @@ function Inputs() {
     const [data, setData] = useState([]);
     
     const handleSASbmit = (formData) => {
+        axios.post("http://localhost:5000/api/Notes", { formData }).catch((error) => { console.log(error) })
         const newData = [...data, formData];
         newData.sort((a, b) => new Date(a.date) - new Date(b.date)); 
         setData(newData);
@@ -56,7 +57,7 @@ function Inputs() {
     
     useEffect(() => {
         console.log("sas");
-        axios.get("http://localhost:5192/api/Notes").then(res => {
+        axios.get("http://localhost:5000/api/Notes").then(res => {
             setArray(res.data);
             console.log(res.data);
         });
