@@ -203,6 +203,7 @@ function Inputs() {
       <table>
         <thead>
           <tr>
+            <th>Market</th>
             <th>Name</th>
             <th>Phone</th>
             <th>Device</th>
@@ -214,6 +215,7 @@ function Inputs() {
         <tbody>
           {data.map((row, index) => (
             <tr key={index}>
+              <td>{row.market}</td>
               <td>{row.client}</td>
               <td>{row.phone}</td>
               <td>{row.device}</td>
