@@ -1,5 +1,6 @@
 import './inputs.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { useForm } from "react-hook-form";
 
@@ -31,26 +32,35 @@ function Inputs() {
         mode: "onBlur"
       });
     
-      const onSubmit = (data) => {
+    const onSubmit = (data) => {
         handleSASbmit(data);
         console.log(data);
         reset();
       };
     
-      const [age, setAge] = React.useState('');
+    const [age, setAge] = React.useState('');
     
-      const handleChange = (event) => {
+    const handleChange = (event) => {
         setAge(event.target.value);
       };
     
-      const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     
-      const handleSASbmit = (formData) => {
+    const handleSASbmit = (formData) => {
         const newData = [...data, formData];
         newData.sort((a, b) => new Date(a.date) - new Date(b.date)); 
         setData(newData);
       };
-
+    
+    const [array, setArray] = useState([]);
+    
+    useEffect(() => {
+        console.log("sas");
+        axios.get("http://localhost:5192/api/Notes").then(res => {
+            setArray(res.data);
+            console.log(res.data);
+        });
+    }, []);
 
 
     return (

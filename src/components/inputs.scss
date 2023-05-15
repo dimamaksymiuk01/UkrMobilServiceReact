@@ -294,6 +294,9 @@ $baby-blue: #f8faff;
         }
     }
     tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
         tr {
             display: flex;
             justify-content: center;

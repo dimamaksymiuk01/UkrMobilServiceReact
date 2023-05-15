@@ -224,6 +224,11 @@ thead tr th:nth-child(7) {
   width: 100px;
 }
 
+tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 tbody tr {
   display: flex;
   justify-content: center;
