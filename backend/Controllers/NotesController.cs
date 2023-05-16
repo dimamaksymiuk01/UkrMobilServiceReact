@@ -51,7 +51,7 @@ namespace UkrMobilServiceNotes2.Controllers
             await repository.CreateNote(tmp);
             return Ok(tmp);
         }
-        [HttpPost("")]
+        [HttpPost("{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> ChangeNoteStatus(Guid id)
         {

@@ -58,6 +58,17 @@ function Inputs() {
     setData(newData);
   };
 
+  const handleStatusChange = (note) => {
+    console.log("status change");
+    axios.post("http://localhost:5000/api/Notes/" + note.id)
+      .then(res => {
+        // з api прилітає та сама note, але вже з поміняним статусом
+        // тут обновити дані в табличці
+        console.log(res.data);
+      })
+      .catch((error) => { console.log(error) });
+  };
+
   return (
     <>
       <h1>UKRmobil service notes</h1>
