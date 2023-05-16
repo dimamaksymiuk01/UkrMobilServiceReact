@@ -43,5 +43,18 @@ namespace UkrMobilServiceNotes2.Data
         {
             return await context.Notes.ToListAsync();
         }
+
+        public async Task<Note> ChangeStatus(Guid id)
+        {
+            var tmp = context.Notes.Find(id);
+            tmp.Status = !tmp.Status;
+            await context.SaveChangesAsync();
+            return tmp;
+        }
+
+        public async Task<Note> GetNoteById(Guid id)
+        {
+            return await context.Notes.FindAsync(id);
+        }
     }
 }

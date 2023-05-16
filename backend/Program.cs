@@ -2,6 +2,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using UkrMobilServiceNotes2.Data;
+using AutoMapper;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=UkrMobilNotes.db"));
 builder.Services.AddTransient<INotesRepository, NotesRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,9 +40,10 @@ app.MapControllers();
 
 app.UseCors(builder =>
     builder
-     .AllowAnyOrigin()
-     .AllowAnyHeader()
-     .AllowAnyMethod()
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed(origin => true)
 );
 // app.UseCors("AllowAll");
 

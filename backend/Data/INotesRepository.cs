@@ -11,6 +11,8 @@ namespace UkrMobilServiceNotes2.Data
         public Task<Note> CreateNote(Note note);
         public Task DeleteNote(Guid id);
         public Task<List<Note>> GetAllNotes();
+        public Task<Note> GetNoteById(Guid id);
+        public Task<Note> ChangeStatus(Guid id);
         public Task<Note> UpdateNote(Note note);
     }
 }

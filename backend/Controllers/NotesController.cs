@@ -14,10 +14,12 @@ namespace UkrMobilServiceNotes2.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INotesRepository repository;
+        private readonly IMapper mapper;
 
-        public NotesController(INotesRepository repository)
+        public NotesController(INotesRepository repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet("")]
@@ -38,16 +40,27 @@ namespace UkrMobilServiceNotes2.Controllers
 
         [HttpPost("")]
         [AllowAnonymous]
-        public async Task<IActionResult> AddNote([FromBody] Note note)
+        public async Task<IActionResult> AddNote([FromBody] NoteCreateDto noteDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            Note tmp = note;
+            Note tmp = mapper.Map<Note>(noteDto);
             tmp.Id = Guid.NewGuid();
             await repository.CreateNote(tmp);
             return Ok(tmp);
+        }
+        [HttpPost("")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ChangeNoteStatus(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            await repository.ChangeStatus(id);
+            return Ok(await repository.GetNoteById(id));
         }
     }
 }

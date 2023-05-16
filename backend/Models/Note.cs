@@ -9,5 +9,6 @@ namespace UkrMobilServiceNotes2.Models
         public string? Phone { get; set; }
         public string? Product { get; set; }
         public DateTime? Date { get; set; }
+        public bool Status { get; set; } = false;
     }
 }
