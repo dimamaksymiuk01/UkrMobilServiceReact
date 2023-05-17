@@ -56,6 +56,7 @@ function Inputs() {
     setData(newData);
   };
 
+
   const handleStatusChange = (note) => {
     console.log("status change");
     axios.post("http://localhost:5000/api/Notes/" + note.id)
@@ -207,7 +208,9 @@ function Inputs() {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, index) => (
+            {data.filter((row)=>{
+              return row.status === false
+            }).map((row, index) => (
               <tr key={index}>
                 <td>{row.market}</td>
                 <td>{row.client}</td>
