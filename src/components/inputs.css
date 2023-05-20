@@ -212,7 +212,7 @@ thead tr {
   border-radius: 10px;
 }
 thead tr th {
-  width: 160px;
+  width: 175px;
   height: 50px;
   display: flex;
   flex-wrap: wrap;
@@ -220,8 +220,14 @@ thead tr th {
   align-items: center;
   text-align: center;
 }
-thead tr th:nth-child(7) {
+thead tr th:nth-child(1) {
   width: 100px;
+}
+thead tr th:nth-child(2) {
+  width: 150px;
+}
+thead tr th:nth-child(7) {
+  width: 140px;
 }
 
 tbody {
@@ -237,15 +243,21 @@ tbody tr {
 }
 tbody tr td {
   min-height: 50px;
-  width: 160px;
+  width: 175px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
-tbody tr td:nth-child(7) {
+tbody tr td:nth-child(1) {
   width: 100px;
+}
+tbody tr td:nth-child(2) {
+  width: 150px;
+}
+tbody tr td:nth-child(7) {
+  width: 140px;
   display: flex;
   justify-content: center;
   align-items: center;

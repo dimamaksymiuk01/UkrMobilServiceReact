@@ -4,14 +4,21 @@ import axios from 'axios';
 
 import { useForm } from "react-hook-form";
 
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import * as React from 'react'; 
+import InputLabel from '@mui/material/InputLabel'; //хуй зна
+import MenuItem from '@mui/material/MenuItem'; //хуй зна
+import FormControl from '@mui/material/FormControl'; //хуй зна
+import Select from '@mui/material/Select'; //селект вибору магазину
 
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
+import Alert from '@mui/material/Alert'; //алерт валідації
+import Stack from '@mui/material/Stack'; //алерт валідації
+
+import moment from 'moment'; //бібліотека з датами
+
+import Button from '@mui/material/Button'; //кнопка делейта
+import DeleteIcon from '@mui/icons-material/Delete'; //кнопка делейта
+
+
 
 function Inputs() {
 
@@ -38,6 +45,18 @@ function Inputs() {
     });
   }, []);
 
+  const fetchData = () => {
+    axios.get("http://localhost:5000/api/Notes")
+      .then(res => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  
+
   const onSubmit = (data) => {
     handleSASbmit(data);
     console.log(data);
@@ -48,25 +67,59 @@ function Inputs() {
     setAge(event.target.value);
   };
 
+  // const handleSASbmit = (formData) => {
+  //   console.log(formData);
+  //   axios.post("http://localhost:5000/api/Notes", formData).catch((error) => { console.log(error) })
+  //   const newData = [...data, formData];
+  //   newData.sort((a, b) => new Date(a.date) - new Date(b.date));
+  //   setData(newData);
+  // };
+
   const handleSASbmit = (formData) => {
     console.log(formData);
-    axios.post("http://localhost:5000/api/Notes", formData).catch((error) => { console.log(error) })
-    const newData = [...data, formData];
-    newData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    setData(newData);
+    axios.post("http://localhost:5000/api/Notes", formData)
+      .then(() => {
+        fetchData(); // Оновити дані після успішного додавання запису
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+
+  // const handleStatusChange = (note) => {
+  //   console.log("status change");
+  //   axios.post("http://localhost:5000/api/Notes/" + note.id)
+  //     .then(res => {
+  //       // з api прилітає та сама note, але вже з поміняним статусом
+  //       // тут обновити дані в табличці
+  //       // console.log(res.data);
+  //       const currentDate = moment().format('LL');
+
+
+  //     })
+  //     .catch((error) => { console.log(error) });
+  // };
 
   const handleStatusChange = (note) => {
     console.log("status change");
     axios.post("http://localhost:5000/api/Notes/" + note.id)
-      .then(res => {
-        // з api прилітає та сама note, але вже з поміняним статусом
-        // тут обновити дані в табличці
-        console.log(res.data);
+      .then(() => {
+        fetchData(); // Оновити дані після успішної зміни статусу
       })
-      .catch((error) => { console.log(error) });
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
+
+// я трохи переписав код, бо нам треба було кожного разу оновлювати сторінку коли відбувалися якісь зміни в статусі або 
+// додавання в табличку. Ща все додається і видаляється моментально. + чутка візуал підкачав і поставив норм дати в табличку
 
   return (
     <>
@@ -217,19 +270,11 @@ function Inputs() {
                 <td>{row.phone}</td>
                 <td>{row.device}</td>
                 <td>{row.product}</td>
-                <td>{row.date}</td>
+                <td>{moment(row.date).format('LL')}</td>              
                 <td>
-                  {/* <label className="toggleButton">
-                    <input type="checkbox" />
-                    <div>
-                      <svg viewBox="0 0 44 44">
-                        <path d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758" transform="translate(-2.000000, -2.000000)"></path>
-                      </svg>
-                    </div>
-                  </label> */}
-                <button onClick={() => handleStatusChange(row)}>Test</button>
-
-                </td>
+                  {/* <button onClick={() => handleStatusChange(row)}>Test</button> */}
+                    <Button onClick={() => handleStatusChange(row)} variant="outlined" startIcon={<DeleteIcon />}>delete</Button>
+                  </td>
               </tr>
             ))}
           </tbody>
