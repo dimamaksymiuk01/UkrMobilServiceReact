@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using UkrMobilServiceNotes2.Data;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=UkrMobilNotes.db"));
 builder.Services.AddTransient<INotesRepository, NotesRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddSpaStaticFiles(configuration => configuration.RootPath = "../build");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,14 +47,18 @@ app.UseCors(builder =>
     .AllowAnyMethod()
     .SetIsOriginAllowed(origin => true)
 );
-// app.UseCors("AllowAll");
+app.UseStaticFiles();
+app.UseAuthorization();
 
-// app.UseCors(builder =>
-//             builder
-//             .WithOrigins("https://localhost:5000", "http://localhost:3000", "http://localhost:3007", "https://localhost:3007")            
-//             .AllowAnyHeader()
-//             .AllowAnyMethod()
-//             .AllowCredentials()
-// );
+app.UseEndpoints(endpoints => endpoints.MapControllers());
+
+app.UseSpa(spa =>
+          {
+              spa.Options.SourcePath = "..";
+              if (app.Environment.IsDevelopment())
+              {
+                  spa.UseReactDevelopmentServer(npmScript: "start");
+              }
+          });
 
 app.Run("http://localhost:5000");
