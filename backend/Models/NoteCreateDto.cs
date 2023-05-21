@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
-
 namespace UkrMobilServiceNotes2.Models
 {
     public class NoteCreateDto
@@ -18,6 +17,6 @@ namespace UkrMobilServiceNotes2.Models
         [JsonPropertyName("date")]
         public DateTime? Date { get; set; }
         [JsonPropertyName("status")]
-        public bool? Status { get; set; }
+        public bool? Status { get; set; } = false;
     }
 }
