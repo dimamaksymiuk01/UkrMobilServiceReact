@@ -25,8 +25,9 @@ namespace UkrMobilServiceNotes2.Data
         protected override void OnModelCreating(ModelBuilder mb)
         {
             base.OnModelCreating(mb);
+            mb.HasPostgresExtension("uuid-ossp");
 
-            mb.Entity<Note>().Property(user => user.Id).HasDefaultValueSql("NEWID()");
+            mb.Entity<Note>().Property(user => user.Id).HasDefaultValueSql("uuid_generate_v4()");
         }
     }
 }

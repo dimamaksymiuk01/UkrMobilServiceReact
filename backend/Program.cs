@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=UkrMobilNotes.db"));
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=testtestDB;Username=postgres;Password=2512002"));
 builder.Services.AddTransient<INotesRepository, NotesRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSpaStaticFiles(configuration => configuration.RootPath = "../build");
