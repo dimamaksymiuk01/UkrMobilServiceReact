@@ -22,7 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=testtestDB;Username=postgres;Password=2512002"));
 builder.Services.AddTransient<INotesRepository, NotesRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddSpaStaticFiles(configuration => configuration.RootPath = "../build");
+builder.Services.AddSpaStaticFiles(configuration => configuration.RootPath = "frontend/build");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,7 +55,7 @@ app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.UseSpa(spa =>
           {
-              spa.Options.SourcePath = "..";
+              spa.Options.SourcePath = "frontend";
               if (app.Environment.IsDevelopment())
               {
                   spa.UseReactDevelopmentServer(npmScript: "start");
