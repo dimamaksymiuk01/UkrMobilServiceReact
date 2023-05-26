@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { useForm } from "react-hook-form";
 
-import * as React from 'react'; 
+import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel'; //хуй зна
 import MenuItem from '@mui/material/MenuItem'; //хуй зна
 import FormControl from '@mui/material/FormControl'; //хуй зна
@@ -39,14 +39,14 @@ function Inputs() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/Notes").then(res => {
+    axios.get("http://ukrmobilnotes.pp.ua/api/Notes").then(res => {
       setData(res.data);
       console.log(res.data);
     });
   }, []);
 
   const fetchData = () => {
-    axios.get("http://localhost:5000/api/Notes")
+    axios.get("http://ukrmobilnotes.pp.ua/api/Notes")
       .then(res => {
         setData(res.data);
         console.log(res.data);
@@ -55,7 +55,7 @@ function Inputs() {
         console.log(error);
       });
   };
-  
+
 
   const onSubmit = (data) => {
     handleSASbmit(data);
@@ -69,7 +69,7 @@ function Inputs() {
 
   // const handleSASbmit = (formData) => {
   //   console.log(formData);
-  //   axios.post("http://localhost:5000/api/Notes", formData).catch((error) => { console.log(error) })
+  //   axios.post("http://ukrmobilnotes.pp.ua/api/Notes", formData).catch((error) => { console.log(error) })
   //   const newData = [...data, formData];
   //   newData.sort((a, b) => new Date(a.date) - new Date(b.date));
   //   setData(newData);
@@ -77,7 +77,7 @@ function Inputs() {
 
   const handleSASbmit = (formData) => {
     console.log(formData);
-    axios.post("http://localhost:5000/api/Notes", formData)
+    axios.post("http://ukrmobilnotes.pp.ua/api/Notes", formData)
       .then(() => {
         fetchData(); // Оновити дані після успішного додавання запису
       })
@@ -89,7 +89,7 @@ function Inputs() {
 
   // const handleStatusChange = (note) => {
   //   console.log("status change");
-  //   axios.post("http://localhost:5000/api/Notes/" + note.id)
+  //   axios.post("http://ukrmobilnotes.pp.ua/api/Notes/" + note.id)
   //     .then(res => {
   //       // з api прилітає та сама note, але вже з поміняним статусом
   //       // тут обновити дані в табличці
@@ -103,7 +103,7 @@ function Inputs() {
 
   const handleStatusChange = (note) => {
     console.log("status change");
-    axios.post("http://localhost:5000/api/Notes/" + note.id)
+    axios.post("http://ukrmobilnotes.pp.ua/api/Notes/" + note.id)
       .then(() => {
         fetchData(); // Оновити дані після успішної зміни статусу
       })
@@ -116,10 +116,10 @@ function Inputs() {
   useEffect(() => {
     fetchData();
   }, []);
-  
 
-// я трохи переписав код, бо нам треба було кожного разу оновлювати сторінку коли відбувалися якісь зміни в статусі або 
-// додавання в табличку. Ща все додається і видаляється моментально. + чутка візуал підкачав і поставив норм дати в табличку
+
+  // я трохи переписав код, бо нам треба було кожного разу оновлювати сторінку коли відбувалися якісь зміни в статусі або 
+  // додавання в табличку. Ща все додається і видаляється моментально. + чутка візуал підкачав і поставив норм дати в табличку
 
   return (
     <>
@@ -261,7 +261,7 @@ function Inputs() {
             </tr>
           </thead>
           <tbody>
-            {data.filter((row)=>{
+            {data.filter((row) => {
               return row.status === false
             }).map((row, index) => (
               <tr key={index}>
@@ -270,11 +270,11 @@ function Inputs() {
                 <td>{row.phone}</td>
                 <td>{row.device}</td>
                 <td>{row.product}</td>
-                <td>{moment(row.date).format('LL')}</td>              
+                <td>{moment(row.date).format('LL')}</td>
                 <td>
                   {/* <button onClick={() => handleStatusChange(row)}>Test</button> */}
-                    <Button onClick={() => handleStatusChange(row)} variant="outlined" startIcon={<DeleteIcon />}>delete</Button>
-                  </td>
+                  <Button onClick={() => handleStatusChange(row)} variant="outlined" startIcon={<DeleteIcon />}>delete</Button>
+                </td>
               </tr>
             ))}
           </tbody>
